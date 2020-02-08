@@ -202,7 +202,7 @@
 									<!--/Status-->
 
 									<!--Delivery Date-->
-									{% if form.delivery_date.errors %}
+									<!--{% if form.delivery_date.errors %}
 										{{ form.delivery_date(class="form-control form-control-lg") }}
 										<div class="invalid-feedback">
 											
@@ -213,15 +213,15 @@
 											{% endfor %}
 
 										</div>
-									{% else %}
+									{% else %}-->
 
 										{{ form.delivery_date(class="form-control form-control-lg") }}
 
-									{% endif %}
+								<!--	{% endif %}-->
 									<!--/Delivery Date-->
 
 									<!--Assigned Date-->
-									{% if form.assigned_date.errors %}
+									<!--{% if form.assigned_date.errors %}
 										{{ form.assigned_date(class="form-control form-control-lg") }}
 										<div class="invalid-feedback">
 											
@@ -236,7 +236,7 @@
 
 										{{ form.assigned_date(class="form-control form-control-lg") }}
 
-									{% endif %}
+									<!--{% endif %}-->
 									<!--/Assigned Date-->
 
 									<!--Condition-->
@@ -265,6 +265,7 @@
 					</div>
 					
 					
+					 <h4>Already Have An Account?<a href="{{ url_for('users.login') }}"> Login</a><h6>
 				</div>
 			</div>
 		</div>

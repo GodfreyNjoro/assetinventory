@@ -53,12 +53,13 @@ class Monitor(db.Model):
 	condition = db.Column(db.Text, nullable=False)
 	
 	def __repr__(self):
-		return f"Monitor('{self.serial_number}', '{self.model_name}', '{self.asset_color}', {self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
+		return f"Monitor('{self.serial_number}', '{self.model_name}', '{self.asset_color}', '{self.screen_size}', '{self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
 
 
 class CPU(db.Model):
 	serial_number = db.Column(db.String(10), primary_key=True)
 	model_name = db.Column(db.String(20), nullable=False)
+	series_name = db.Column(db.String(20), nullable=False)
 	asset_color = db.Column(db.String(50), unique=True, nullable=False)
 	memory = db.Column(db.String(50), nullable=False)
 	processor = db.Column(db.String(50), nullable=False)
@@ -71,7 +72,7 @@ class CPU(db.Model):
 	condition = db.Column(db.Text, nullable=False)
 	
 	def __repr__(self):
-		return f"CPU('{self.serial_number}', '{self.model_name}', '{self.asset_color}', '{self.memory}', '{self.processor}', '{self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
+		return f"CPU('{self.serial_number}', '{self.model_name}', '{self.series_name}', '{self.asset_color}', '{self.memory}', '{self.processor}', '{self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
 
 
 class Phone(db.Model):

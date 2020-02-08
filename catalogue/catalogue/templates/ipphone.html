@@ -1,0 +1,215 @@
+<div class="modal-header">
+        <h5 class="modal-title" id="addPhoneModalLabel">Add New Phone</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+
+<div class="modal-body">
+    <div class="graph-form agile_info_shadow">
+         <h3 class="w3_inner_tittle two">New Phone </h3>
+            <div class="form-body">
+                <form method="POST" action="{{ url_for('ipphone.phone') }}">
+							{{ form.hidden_tag() }} 
+								<!--Serial Number-->
+								{% if form.serial_number.errors %}
+									{{ form.serial_number(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.serial_number.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.serial_number(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Serial Number-->
+
+								<!--Model Name-->
+								{% if form.model_name.errors %}
+									{{ form.model_name(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.model_name.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.model_name(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Model Name-->
+
+
+								<!--Asset Color-->
+								{% if form.asset_color.errors %}
+									{{ form.asset_color(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.asset_color.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.asset_color(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Asset Color-->
+
+				
+								<!--Location-->
+								{% if form.location.errors %}
+									{{ form.location(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.location.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.location(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Location-->
+
+								<!--Department-->
+								{% if form.department.errors %}
+									{{ form.department(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.department.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.department(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Department-->
+
+								<!--Assigned To-->
+								{% if form.assigned_to.errors %}
+									{{ form.assigned_to(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.assigned_to.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.assigned_to(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Assigned To-->
+
+								<!--Status-->
+								{% if form.status.errors %}
+									{{ form.status(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.status.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.status(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Status-->
+
+								<!--Delivery Date-->
+								{% if form.delivery_date.errors %}
+									{{ form.delivery_date(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.delivery_date.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.delivery_date(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Delivery Date-->
+
+								<!--Assigned Date-->
+								{% if form.assigned_date.errors %}
+									{{ form.assigned_date(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.assigned_date.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.assigned_date(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Assigned Date-->
+
+								<!--Condition-->
+								{% if form.condition.errors %}
+									{{ form.condition(class="form-control form-control-lg") }}
+									<div class="invalid-feedback">
+										
+										{% for error in form.condition.errors %}
+
+											<span>{{ error }}</span>
+
+										{% endfor %}
+
+									</div>
+								{% else %}
+
+									{{ form.condition(class="form-control form-control-lg") }}
+
+								{% endif %}
+								<!--/Condition-->
+								
+								<div class="tp">
+									{{ form.submit(class="btn btn-outline-info") }}
+								</div>
+				</form> 
+			</div>
+
+	</div>
+</div>
+      
+      

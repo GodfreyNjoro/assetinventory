@@ -293,7 +293,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             
                                             <i class="fa fa-laptop" aria-hidden="true"></i>
                                             <div class="ca-content">
-                                                <h4 class="ca-main">16,808</h4>
+                                                <h4 class="ca-main">{{ laptops.total }}</h4>
                                                 <h3 data-toggle="modal" href="{{ url_for('laptops.laptop') }}" class="ca-sub" data-target="#addLaptopModal">New Laptop</h3>
                                             </div>
                                         </a>
@@ -302,7 +302,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <a href="#">
                                           <i class="fa fa-desktop" aria-hidden="true"></i>
                                             <div class="ca-content">
-                                                <h4 class="ca-main one">26,808</h4>
+                                                <h4 class="ca-main one">{{ monitors.total }}</h4>
                                                 <h3 data-toggle="modal" href="{{ url_for('monitors.monitor') }}" class="ca-sub one" data-target="#addMonitorModal">New Monitor</h3>
                                             </div>
                                         </a>
@@ -311,7 +311,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <a href="#">
                                             <i class="fa fa-server" aria-hidden="true"></i>
                                             <div class="ca-content">
-                                            <h4 class="ca-main two">29,008</h4>
+                                            <h4 class="ca-main two">{{ cpus.total }}</h4>
                                                 <h3 data-toggle="modal" href="{{ url_for('cpus.cpu') }}" class="ca-sub two" data-target="#addCPUModal">New CPU</h3>
                                             </div>
                                         </a>
@@ -320,7 +320,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <a href="#">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                             <div class="ca-content">
-                                                <h4 class="ca-main three">49,436</h4>
+                                                <h4 class="ca-main three">{{ phones.total }}</h4>
                                                 <h3 data-toggle="modal" href="{{ url_for('ipphone.phone') }}" class="ca-sub three" data-target="#addPhoneModal">New Phone</h3>
                                             </div>
                                         </a>

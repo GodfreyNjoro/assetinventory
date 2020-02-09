@@ -27,3 +27,7 @@ def laptop():
 		return redirect(url_for('main.main_page'))
 
 	return render_template('laptop.html', title='Laptop', form=form)
+
+
+class laptop_count():
+	total = db.session.query(Laptop).count()

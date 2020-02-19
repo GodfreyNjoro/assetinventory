@@ -10,7 +10,7 @@ def load_user(user_id):
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(20), unique=True, nullable=False)
-	email = db.Column(db.String(20), unique=True, nullable=False)
+	email = db.Column(db.String(100), unique=True, nullable=False)
 	password = db.Column(db.String(60), nullable=False)
 
 
@@ -20,72 +20,52 @@ class User(db.Model, UserMixin):
 
 
 
-class Laptop(db.Model):
+conditions = db.Table('conditions', 
+		db.Column('condition_id', db.Integer, db.ForeignKey('condition.id'), primary_key=True), 
+		db.Column('asset_id', db.String(10), db.ForeignKey('asset.serial_number'), primary_key=True)
+)
+
+
+class Asset(db.Model):
 	serial_number = db.Column(db.String(10), primary_key=True)
+	asset_category = db.Column(db.String(20), nullable=False)
 	model_name = db.Column(db.String(20), nullable=False)
-	series_name = db.Column(db.String(20), nullable=False)
+	series_name = db.Column(db.String(20))
 	asset_color = db.Column(db.String(50), nullable=False)
-	memory = db.Column(db.String(50), nullable=False)
-	processor = db.Column(db.String(50), nullable=False)
+	memory = db.Column(db.String(50))
+	processor = db.Column(db.String(50))
 	location = db.Column(db.String(50), nullable=False)
-	department = db.Column(db.String(50))
-	assigned_to = db.Column(db.String(50), unique=True, nullable=True)
 	status = db.Column(db.String(10), nullable=False)
 	delivery_date = db.Column(db.String(30), nullable=False)
-	assigned_date = db.Column(db.String(30))
-	condition = db.Column(db.Text, nullable=False)
+	condition = db.relationship("Condition", secondary=conditions, lazy='subquery', backref=db.backref('assets', lazy=True))
+	assigned_id = db.Column(db.Integer, db.ForeignKey('assigned_to.id'))
 	
 	def __repr__(self):
-		return f"Laptop('{self.serial_number}', '{self.model_name}', '{self.asset_color}', '{self.memory}', '{self.processor}', '{self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
+		return f"Asset('{self.serial_number}', '{self.catalogue}', '{self.model_name}', '{self.asset_color}', '{self.memory}', '{self.processor}', '{self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
 
 
-class Monitor(db.Model):
-	serial_number = db.Column(db.String(10), primary_key=True)
-	model_name = db.Column(db.String(20), nullable=False)
-	asset_color = db.Column(db.String(50), nullable=False)
-	screen_size = db.Column(db.String(10), nullable=False)
-	location = db.Column(db.String(50), nullable=False)
-	department = db.Column(db.String(50), nullable=True)
-	assigned_to = db.Column(db.String(50), unique=True, nullable=True)
-	status = db.Column(db.String(50), nullable=False)
-	delivery_date = db.Column(db.String(30), nullable=False)
-	assigned_date = db.Column(db.String(30), nullable=True)
-	condition = db.Column(db.Text, nullable=False)
-	
+
+class Assigned_to(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	first_name = db.Column(db.String(20), nullable=False)
+	last_name = db.Column(db.String(20), nullable=False)
+	department = db.Column(db.String(20), nullable=False)
+	assigned_date = db.Column(db.String(30), nullable=False)
+	asset = db.relationship('Asset', backref='asset', lazy=True)
+
+
 	def __repr__(self):
-		return f"Monitor('{self.serial_number}', '{self.model_name}', '{self.asset_color}', '{self.screen_size}', '{self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
+		return f"Assigned_to('{self.first_name}', '{self.last_name}', '{self.department}', '{self.assigned_date}')"
 
 
-class CPU(db.Model):
-	serial_number = db.Column(db.String(10), primary_key=True)
-	model_name = db.Column(db.String(20), nullable=False)
-	series_name = db.Column(db.String(20), nullable=False)
-	asset_color = db.Column(db.String(50), nullable=False)
-	memory = db.Column(db.String(50), nullable=False)
-	processor = db.Column(db.String(50), nullable=False)
-	location = db.Column(db.String(50), nullable=False)
-	department = db.Column(db.String(50), nullable=True)
-	assigned_to = db.Column(db.String(50), unique=True, nullable=True)
-	status = db.Column(db.String(50), nullable=False)
-	delivery_date = db.Column(db.String(30), nullable=False)
-	assigned_date = db.Column(db.String(30), nullable=True)
-	condition = db.Column(db.Text, nullable=False)
-	
+class Condition(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	description = db.Column(db.String(200), nullable=False)
+	condition_status = db.Column(db.String(100))
+	reporting_date = db.Column(db.String(50))
+	resolving_date = db.Column(db.String(50))
+
+
 	def __repr__(self):
-		return f"CPU('{self.serial_number}', '{self.model_name}', '{self.series_name}', '{self.asset_color}', '{self.memory}', '{self.processor}', '{self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"
+		return f"Condition('{self.description}', '{self.condition_status}', '{self.reporting_date}', '{self.resolving_date}')"
 
-
-class Phone(db.Model):
-	serial_number = db.Column(db.String(10), primary_key=True)
-	model_name = db.Column(db.String(20), nullable=False)
-	asset_color = db.Column(db.String(50), nullable=False)
-	location = db.Column(db.String(50), nullable=False)
-	department = db.Column(db.String(50), nullable=True)
-	assigned_to = db.Column(db.String(50), unique=True, nullable=True)
-	status = db.Column(db.String(50), nullable=False)
-	delivery_date = db.Column(db.String(30), nullable=False)
-	assigned_date = db.Column(db.String(30), nullable=True)
-	condition = db.Column(db.Text, nullable=False)
-	
-	def __repr__(self):
-		return f"Phone('{self.serial_number}', '{self.model_name}', '{self.asset_color}', {self.location}', '{self.department}', '{self.assigned_to}', '{self.status}', '{self.delivery_date}', '{self.assigned_date}', '{self.condition}')"

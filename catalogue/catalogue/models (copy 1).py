@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
 		return f"User('{self.username}', '{self.email}')"
 
 issues = db.Table('issues', db.Column('issue_id', db.Integer, db.ForeignKey('issue.id'), primary_key=True), 
-							db.Column('computer_id', db.String(10), db.ForeignKey('computer.serial_number'), primary_key=True)
+							db.Column('computer_id', db.Integer, db.ForeignKey('computer.serial_number'), primary_key=True)
 )
 
 class Computer(db.Model):

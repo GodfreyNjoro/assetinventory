@@ -14,15 +14,9 @@ login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
 from catalogue.users.routes import users
-from catalogue.laptops.routes import laptops
-from catalogue.monitors.routes import monitors
-from catalogue.cpus.routes import cpus 
-from catalogue.ipphone.routes import ipphone
+from catalogue.assets.routes import assets
 from catalogue.main.routes import main
 
 app.register_blueprint(users)
-app.register_blueprint(laptops)
-app.register_blueprint(monitors)
-app.register_blueprint(cpus)
-app.register_blueprint(ipphone)
+app.register_blueprint(assets)
 app.register_blueprint(main)

@@ -35,7 +35,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <nav class="gn-menu-wrapper">
                         <div class="gn-scroller scrollbar1">
                             <ul class="gn-menu agile_menu_drop">
-                                <li><a href="main-page.html"> <i class="fa fa-tachometer"></i> Dashboard</a></li>
+                                <li><a href="/"> <i class="fa fa-tachometer"></i> Dashboard</a></li>
                                 <li>
                                     <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i> UI Components <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
                                     <ul class="gn-submenu">
@@ -84,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </nav>
                 </li>
                 <!-- //nav_agile_w3l -->
-                <li class="second logo"><h1><a href="main-page.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Asset Inventory </a></h1></li>
+                <li class="second logo"><h1><a href="main_page.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Asset Inventory </a></h1></li>
                     <li class="second admin-pic">
                        <ul class="top_dp_agile">
                                     <li class="dropdown profile_details_drop">
@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <ul class="dropdown-menu drp-mnu">                                      
                                             <!--<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>--> 
                                             <!--<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>--> 
-                                            <li> <a href="{{ url_for('users.logout') }}"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                            <li> <a href="{{ url_for('account.logout') }}"><i class="fa fa-sign-out"></i> Logout</a> </li>
                                         </ul>
                                     </li>
                                     
@@ -294,7 +294,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <i class="fa fa-edit" aria-hidden="true"></i>
                                             <div class="ca-content">
                                                 <h4 class="ca-main">{{ asset_num.total }}</h4>
-                                                <h3 data-toggle="modal" href="{{ url_for('assets.asset') }}" class="ca-sub" data-target="#addAssetModal">New Asset</h3>
+                                                <h3 data-toggle="modal" href="{{ url_for('asset.asset') }}" class="ca-sub" data-target="#addAssetModal">New Asset</h3>
                                             </div>
                                         </a>
                                     </li>

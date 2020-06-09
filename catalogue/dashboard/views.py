@@ -23,5 +23,5 @@ def main_page():
 	cpu = Asset.query.filter_by(asset_category='CPU').paginate()
 	phone = Asset.query.filter_by(asset_category='Phone').paginate()
 	table = AssetResults(assets)
-	return render_template('main_page.html', title='Main Page', asset_num=asset_num, assets=assets, table=table, laptop=laptop, monitor=monitor, cpu=cpu, phone=phone)
+	return render_template('dashboard.html', title='Main Page', asset_num=asset_num, assets=assets, table=table, laptop=laptop, monitor=monitor, cpu=cpu, phone=phone)
 

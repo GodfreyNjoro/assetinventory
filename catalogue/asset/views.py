@@ -5,12 +5,26 @@ from catalogue.models import Asset
 from flask_login import login_required
 from . import asset
 
-#@main.route('/main-page')
-#@login_required
-#def main_page():
-#	return render_template('main_page.html')
 
-@asset.route('/asset', methods=['GET', 'POST'])
+
+@asset.route('/asset', methods=['GET'])
+@login_required
+def get_all_assets():
+	"""
+	Get all assets
+	"""
+	return render_template('inventory.assets_list.html', title='Asset')
+
+
+@asset.route('/assets/<int:id>', methods=['GET'])
+@login_required
+def get_asset():
+	"""
+	Get a specific asset
+	"""
+	pass
+
+@asset.route('/asset', methods=['POST'])
 @login_required
 def asset():
 	form = AssetForm()

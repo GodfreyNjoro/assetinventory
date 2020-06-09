@@ -1,0 +1,19 @@
+__pycache__
+venv/*
+tutor/*
+.env
+.sqlite
+
+# *.pyc
+# *.pem
+# *.pub
+# *.tar.gx
+# *.zip
+# *.sql
+# *.db
+# secrets.txt
+# ./tmp
+# ./build/*
+# ./idea/*
+# .idea
+

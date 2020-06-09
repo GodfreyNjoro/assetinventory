@@ -1,0 +1,46 @@
+from flask import render_template, url_for, flash, redirect, request, Blueprint
+from catalogue import  db, bcrypt
+from .forms import RegistrationForm, LoginForm
+from catalogue.models import User
+from flask_login import login_user, current_user, logout_user
+
+from . import account
+
+@account.route('/', methods=['GET', 'POST'])
+@account.route('/login', methods=['GET', 'POST'])
+def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('dashboard.main_page'))
+	form = LoginForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(username=form.username.data).first()
+		if user and bcrypt.check_password_hash(user.password, form.password.data):
+			login_user(user)
+			next_page = request.args.get('next')
+			return redirect(next_page) if next_page else redirect(url_for('dashboard.main_page'))
+		else:			
+			flash('Login Unsuccesful. Please check username and password', 'danger')
+	return render_template('login.html', title='Asset Inventory', form=form)
+
+@account.route('/register', methods=['GET', 'POST'])
+def register():
+	if current_user.is_authenticated:
+		return redirect(url_for('dashboard.main_page'))
+	form = RegistrationForm()
+	if form.validate_on_submit():
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+		db.session.add(user)
+		db.session.commit()
+		flash('Account created!You are now able to login', 'success')
+		return redirect(url_for('account.login'))
+	#else:
+	#	flash(f'Account created for {form.username.data}!', 'danger')
+	#	return redirect(url_for('account.register'))
+
+	return render_template('register.html', title='Register', form=form)
+
+@account.route('/logout')
+def logout(): 
+	logout_user()
+	return redirect(url_for('account.login'))

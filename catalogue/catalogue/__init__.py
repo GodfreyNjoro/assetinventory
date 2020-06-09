@@ -2,21 +2,36 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from catalogue.config import Config
+
+from config import config
 
 
-app = Flask(__name__)
-app.config.from_object(Config)
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
-login_manager.login_view = 'users.login'
-login_manager.login_message_category = 'info'
+bcrypt = Bcrypt()
+db = SQLAlchemy()
+login_manager = LoginManager()
 
-from catalogue.users.routes import users
-from catalogue.assets.routes import assets
-from catalogue.main.routes import main
 
-app.register_blueprint(users)
-app.register_blueprint(assets)
-app.register_blueprint(main)
+def create_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
+
+    bcrypt.init_app(app)
+    db.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'users.login'
+    login_manager.login_message_category = 'info'
+
+    # from catalogue.users.routes import users
+    # from catalogue.assets.routes import assets
+    # from catalogue.main.routes import main
+
+    from account import account as account_blueprint
+    from asset import asset as asset_blueprint
+    from dashboard import dashboard as dashboard_blueprint
+
+    app.register_blueprint(account_blueprint)
+    app.register_blueprint(asset_blueprint)
+    app.register_blueprint(dashboard_blueprint)
+
+    return app

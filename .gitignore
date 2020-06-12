@@ -1,19 +1,8 @@
-__pycache__
 venv/*
-tutor/*
+catalogue/*/__pycache__/*
+catalogue/*/migrations/0*
+catalogue/*/migrations/__pycache__/*
+
 .env
-.sqlite
-
-# *.pyc
-# *.pem
-# *.pub
-# *.tar.gx
-# *.zip
-# *.sql
-# *.db
-# secrets.txt
-# ./tmp
-# ./build/*
-# ./idea/*
-# .idea
-
+__pycache__
+*.pyc

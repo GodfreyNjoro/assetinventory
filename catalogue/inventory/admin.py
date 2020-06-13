@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Asset, AssetCategory
+from .models import Asset, Category
 
 class AssetAdmin(admin.ModelAdmin):
     field = '__all__'
 
-class AssetCategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     field = '__all__'
 
 admin.site.register(Asset, AssetAdmin)
-admin.site.register(AssetCategory, AssetCategoryAdmin)
+admin.site.register(Category, CategoryAdmin)

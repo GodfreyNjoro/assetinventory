@@ -1,0 +1,251 @@
+{% extends "core/base.html" %}
+{% load  bootstrap4 static custom_widgets %}
+{% block title %}Asset{% endblock title%}
+{% block content%}
+<div class="container-fluid disable-text-selection">
+    <div class="row">
+        <div class="col-12">
+            <div class="mb-2">
+                <h1>Asset List</h1>
+                <div class="float-sm-right text-zero">
+                    <button type="button" class="btn btn-outline-primary btn-lg top-right-button mr-1" data-toggle="modal" data-backdrop="static" data-target="#assetModalRight">ADD NEW </button>
+
+                    <div class="btn-group ">
+                        <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+                            <label class="custom-control custom-checkbox mb-0 d-inline-block">
+                                <input type="checkbox" class="custom-control-input" id="checkAll">
+                                <span class="custom-control-label"></span>
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split pl-2 pr-2"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    </div>
+                </div>
+                <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+                    <ol class="breadcrumb pt-0">
+                        <li class="breadcrumb-item">
+                            <a href="#">Inventory</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Assets</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="mb-2">
+                <a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse" href="#displayOptions"
+                    role="button" aria-expanded="true" aria-controls="displayOptions">
+                    Display Options
+                    <i class="simple-icon-arrow-down align-middle"></i>
+                </a>
+                <div class="collapse d-md-block" id="displayOptions">
+                    <span class="mr-3 mb-2 d-inline-block float-md-left">
+                        <a href="#" class="mr-2 view-icon active">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                                <path class="view-icon-svg" d="M17.5,3H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+                                <path class="view-icon-svg" d="M17.5,10H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+                                <path class="view-icon-svg" d="M17.5,17H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" /></svg>
+                        </a>
+                        <a href="#" class="mr-2 view-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                                <path class="view-icon-svg" d="M17.5,3H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+                                <path class="view-icon-svg" d="M3,2V3H1V2H3m.12-1H.88A.87.87,0,0,0,0,1.88V3.12A.87.87,0,0,0,.88,4H3.12A.87.87,0,0,0,4,3.12V1.88A.87.87,0,0,0,3.12,1Z" />
+                                <path class="view-icon-svg" d="M3,9v1H1V9H3m.12-1H.88A.87.87,0,0,0,0,8.88v1.24A.87.87,0,0,0,.88,11H3.12A.87.87,0,0,0,4,10.12V8.88A.87.87,0,0,0,3.12,8Z" />
+                                <path class="view-icon-svg" d="M3,16v1H1V16H3m.12-1H.88a.87.87,0,0,0-.88.88v1.24A.87.87,0,0,0,.88,18H3.12A.87.87,0,0,0,4,17.12V15.88A.87.87,0,0,0,3.12,15Z" />
+                                <path class="view-icon-svg" d="M17.5,10H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+                                <path class="view-icon-svg" d="M17.5,17H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" /></svg>
+                        </a>
+                        <a href="#" class="mr-2 view-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                                <path class="view-icon-svg" d="M7,2V8H1V2H7m.12-1H.88A.87.87,0,0,0,0,1.88V8.12A.87.87,0,0,0,.88,9H7.12A.87.87,0,0,0,8,8.12V1.88A.87.87,0,0,0,7.12,1Z" />
+                                <path class="view-icon-svg" d="M17,2V8H11V2h6m.12-1H10.88a.87.87,0,0,0-.88.88V8.12a.87.87,0,0,0,.88.88h6.24A.87.87,0,0,0,18,8.12V1.88A.87.87,0,0,0,17.12,1Z" />
+                                <path class="view-icon-svg" d="M7,12v6H1V12H7m.12-1H.88a.87.87,0,0,0-.88.88v6.24A.87.87,0,0,0,.88,19H7.12A.87.87,0,0,0,8,18.12V11.88A.87.87,0,0,0,7.12,11Z" />
+                                <path class="view-icon-svg" d="M17,12v6H11V12h6m.12-1H10.88a.87.87,0,0,0-.88.88v6.24a.87.87,0,0,0,.88.88h6.24a.87.87,0,0,0,.88-.88V11.88a.87.87,0,0,0-.88-.88Z" /></svg>
+                        </a>
+                    </span>
+                    <div class="d-block d-md-inline-block">
+                        <div class="btn-group float-md-left mr-1 mb-1">
+                            <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Order By
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                            </div>
+                        </div>
+                        <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+                            <input placeholder="Search...">
+                        </div>
+                    </div>
+                    <div class="float-md-right">
+                        <span class="text-muted text-small">Displaying 1-10 of 210 items </span>
+                        <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            20
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">10</a>
+                            <a class="dropdown-item active" href="#">20</a>
+                            <a class="dropdown-item" href="#">30</a>
+                            <a class="dropdown-item" href="#">50</a>
+                            <a class="dropdown-item" href="#">100</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separator mb-5"></div>
+        </div>
+    </div>
+
+    <!-- Begining of Form  Modal-->
+    <div class="modal fade modal-right" id="assetModalRight" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalRight" aria-hidden="true">
+        <div class="modal-dialog custom-modal-lg" role="document">    
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% if asset_form.instance.created %}
+                        Edit Asset
+                        {% else %}
+                        Add New
+                        {% endif %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="asset-form" method="POST" action="{% url 'inventory:asset-add' %}">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                {% bootstrap_field asset_form.description form_group_class="form-group col-sm-12" %}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {% bootstrap_field asset_form.tag_id form_group_class="form-group col-sm-12" %}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {% bootstrap_field asset_form.purchased_from form_group_class="form-group col-sm-12" %}
+                            </div>
+                            <div class="form-group  col-md-6">
+                                {{ asset_form.purchase_date|_date_widget:"Purchase Date" }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {% bootstrap_field asset_form.brand form_group_class="form-group col-sm-12" %}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ asset_form.cost|_ksh_widget:"Cost" }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {% bootstrap_field asset_form.model form_group_class="form-group col-sm-12" %}
+                            </div>
+                            <div class="form-group col-md-6 ml-auto">
+                                {% bootstrap_field asset_form.serial_no form_group_class="form-group col-sm-12" %}
+                            </div>
+                            
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {% bootstrap_field asset_form.category form_group_class="form-group col-sm-12" %}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputState">State</label>
+                                <select id="inputState" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputZip">Zip</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                        </div>
+                       
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" value="Submit" class="btn btn-primary" form="asset-form" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of form  Modal-->
+
+
+    <div class="row">
+        <div class=" card col-md-12" >
+            <table class="card-body data-table table-padded  responsive nowrap mb-3" data-order="[[ 1, &quot;desc&quot; ]]">
+                <thead >
+                    <tr>
+                        <th>Tag ID</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Category</th>
+                        <th></th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for asset in assets %}
+                    <tr>
+                        <td>
+                            <a class="list-item-heading" href="Layouts.Details.html">
+                                {{ asset.tag_id }}
+                            </a>
+                        </td>
+                        <td>
+                            <p class="text-muted ">{{ asset.brand }}</p>
+                        </td> 
+                        <td>
+                            <p class="text-muted ">{{ asset.model }}</p>
+                        </td>
+                        <td>
+                            <div class="w-15 w-xs-100">
+                                <span class="badge badge-pill badge-secondary">{{asset.category|upper}}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox pl-1 align-self-center pr-4">
+                                <label class="custom-control custom-checkbox mb-0">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-label"></span>
+                                </label>
+                            </div>
+                        </td>
+                            
+                    </tr>
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+
+        </div>
+        
+        
+        
+       
+    </div>
+</div>
+
+<script>
+
+    $("#submit").click(function () {
+        $("#asset-form").submit();
+        });
+
+
+</script>
+
+{% endblock content %}

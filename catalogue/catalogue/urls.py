@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='dashboard/dashboard.html')),
     path('inventory/', include('inventory.urls', namespace='inventory')),
+    path('', include('department.urls', namespace='department')),
+
 ]

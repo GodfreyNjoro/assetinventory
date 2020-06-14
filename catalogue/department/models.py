@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from core.models import CoreModel as CM
@@ -12,7 +13,7 @@ class Department(CM):
     designated to work together accomplish a common goal
     """
 
-    name = models.CharField("name", max_length=128, unique=True, error_messages={'unique': _("A department with that name already exists ;-)")})
+    name = models.CharField("Department Name", max_length=128, unique=True, error_messages={'unique': _("A department with that name already exists ;-)")})
     enabled = models.BooleanField(_('enabled'), default=True)
 
     def __str__(self):
@@ -20,9 +21,26 @@ class Department(CM):
     
     class Meta:
         ordering = ('created', 'name', )
+    
+    @classmethod
+    def get_add_url(cls):
+        return reverse('department:department-add')
+
+    @classmethod
+    def get_list_url(cls):
+        return reverse('department:department-list')
+
+    def get_absolute_url(self):
+        return reverse('department:department-detail', kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('department:department-edit', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('department:department-delete', kwargs={'pk': self.pk})
 
 
-# class Profile(CM):
+# class Staff(CM):
 #     """
 #     Company employees
 #     """

@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from core.models import CoreModel as CM
@@ -21,7 +22,7 @@ class Asset(CM):
     model = models.CharField(_('Model'), max_length=100, null=True, blank=True, help_text=_('Model name of the asset'))
     serial_no = models.CharField(_('Serial No'), max_length=100, null=True, blank=True, unique=True, help_text=_('Manufacturers serial No.'))
     photo = models.ImageField(_('Asset Photo'), upload_to='images', blank=True, null=True, default=None)
-    category = models.ForeignKey('AssetCategory', on_delete=models.CASCADE, related_name="asset")
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="asset")
     enabled = models.BooleanField(_('enabled'), default=True)
 
     def __str__(self):
@@ -48,11 +49,11 @@ class Asset(CM):
         return reverse('inventory:asset-delete', kwargs={'pk': self.pk})
 
 
-class AssetCategory(CM):
+class Category(CM):
     """
     This is a the category type of an asset
     """
-    name = models.CharField(_('Name'), max_length=100, unique=True, error_messages={'unique': _("A category with that name already exists ;-)")})
+    name = models.CharField(_('Category Name'), max_length=100, unique=True, error_messages={'unique': _("A category with that name already exists ;-)")})
     enabled = models.BooleanField(_('enabled'), default=True)
 
     def __str__(self):

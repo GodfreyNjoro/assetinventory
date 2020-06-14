@@ -83,9 +83,9 @@
                             <span>Users</span>
                         </a>
 
-                        <a href="#" class="icon-menu-item">
+                        <a href="{% url "inventory:category-list" %}" class="icon-menu-item">
                             <i class="iconsmind-Puzzle d-block"></i>
-                            <span>Components</span>
+                            <span>Categories</span>
                         </a>
 
                         <a href="#" class="icon-menu-item">
@@ -98,9 +98,9 @@
                             <span>Surveys</span>
                         </a>
 
-                        <a href="#" class="icon-menu-item">
+                        <a href="{% url 'department:department-list' %}" class="icon-menu-item">
                             <i class="iconsmind-Suitcase d-block"></i>
-                            <span>Tasks</span>
+                            <span>Departments</span>
                         </a>
 
                     </div>
@@ -197,7 +197,7 @@
             <div class="scroll">
                 <ul class="list-unstyled">
                     <li class="active">
-                        <a href="#">
+                        <a href="/">
                             <i class="iconsmind-Dashboard"></i>
                             <span>Dashboard</span>
                         </a>

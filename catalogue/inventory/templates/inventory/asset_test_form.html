@@ -14,50 +14,51 @@
                         {% csrf_token %}
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label>{{ form.description.label_tag}}</label>
-                                {{ form.description }}
-                                <!-- <label>Description</label>
-                                <textarea placeholder="" class="form-control required" rows="2"></textarea> -->
+                                {% bootstrap_field form.description form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Asset Tag ID</label>
-                                <input type="text" class="form-control" id="inputEmail4" placeholder="Asset Tag ID">
+                                {% bootstrap_field form.tag_id form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Purchased From</label>
-                                <input type="text" class="form-control" id="inputPassword4" placeholder="Purchased From">
+                                {% bootstrap_field form.purchased_from form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Date Component</label>
+                                {% bootstrap_field form.purchase_date form_group_class="form-group col-sm-12" %}
+
+                                {% comment %} <label>Date Component</label>
                                 <div class="input-group date">
                                     <span class="input-group-text input-group-append input-group-addon">
                                         <i class="simple-icon-calendar float-left"></i>
                                     </span>
                                     <input type="text" class="form-control">
 
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Brand</label>
-                                <input type="text" class="form-control" id="inputPassword4" placeholder="Brand">
+                                {% bootstrap_field form.brand form_group_class="form-group col-sm-12" %}
+                                {% comment %} <label for="inputPassword4">Brand</label>
+                                <input type="text" class="form-control" id="inputPassword4" placeholder="Brand"> {% endcomment %}
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Cost</label>
+                                {% bootstrap_field form.cost form_group_class="form-group col-sm-12" %}
+                                {% comment %} <label>Cost</label>
                                 <div class="input-group ">
                                     <span class="input-group-text input-group-append input-group-addon">
                                         Ksh<!-- <i class="simple-icon-calendar float-left"></i> -->
                                     </span>
                                     <input type="text" class="form-control">
 
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Model</label>
-                                <input type="text" class="form-control" id="inputPassword4" placeholder="Model">
+                                {% bootstrap_field form.model form_group_class="form-group col-sm-12" %}
+                                {% comment %} <label for="inputPassword4">Model</label>
+                                <input type="text" class="form-control" id="inputPassword4" placeholder="Model"> {% endcomment %}
                             </div>
                             <div class="form-group col-md-6 ml-auto">
-                                <label for="inputPassword4">Serial No</label>
-                                <input type="text" class="form-control" id="inputPassword4" placeholder="Serial No.">
+                                {% bootstrap_field form.serial_no form_group_class="form-group col-sm-12" %}
+                                {% comment %} <label for="inputPassword4">Serial No</label>
+                                <input type="text" class="form-control" id="inputPassword4" placeholder="Serial No."> {% endcomment %}
                             </div>
                             
                         </div>

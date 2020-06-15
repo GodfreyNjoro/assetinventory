@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'core',
     'inventory',
     'issue',
+    'location',
     'ticket',
 ]
 

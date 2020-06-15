@@ -114,7 +114,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title">
                         {% if department_form.instance.created %}
-                        Edit Deparment
+                        Edit Department
                         {% else %}
                         Add New
                         {% endif %}
@@ -151,6 +151,7 @@
             <table class="card-body data-table table-padded  responsive nowrap mb-3" data-order="[[ 1, &quot;desc&quot; ]]">
                 <thead >
                     <tr>
+                        <th></th>
                         <th>Name</th>
                         <th></th>
                     </tr>
@@ -159,18 +160,22 @@
                 <tbody>
                     {% for department in departments %}
                     <tr>
-                        <td>
-                            <a class="list-item-heading" href="Layouts.Details.html">
-                                {{ department.name }}
-                            </a>
-                        </td>
-                        <td>
+                    <td>
                             <div class="custom-control custom-checkbox pl-1 align-self-center pr-4">
                                 <label class="custom-control custom-checkbox mb-0">
                                     <input type="checkbox" class="custom-control-input">
                                     <span class="custom-control-label"></span>
                                 </label>
                             </div>
+                        </td>
+                        <td>
+                            <a class="list-item-heading" href="Layouts.Details.html">
+                                {{ department.name }}
+                            </a>
+                        </td>
+                        <td>
+                            {{department|edit_icon}}
+                            {{department|delete_icon}}
                         </td>
                             
                     </tr>

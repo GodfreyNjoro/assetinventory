@@ -1,5 +1,5 @@
 /* KINDLY USE THIS CSS FILE WHEN MAKING ANY CUSTOM CSS EDITS AND  DON'T TAMPER WITH ANY OTHER CSS FILE ' */
 
-.modal-right .modal-dialog .custom-modal-lg {
+.modal-right .modal-dialog.custom-modal-lg {
     max-width: 800px;
 }

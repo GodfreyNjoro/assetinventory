@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm
 from .models import Asset, Category
+from department.models import Department
+from location.models import Location
 
 UserModel = get_user_model()
 
@@ -11,8 +13,12 @@ class AssetForm(ModelForm):
         self.fields['description'].widget.attrs = {'class' : 'form-control', 'rows': 2}
         self.fields['purchase_date'].widget.attrs = {'class': 'form-control', 'data-type': 'date', 'placeholder': 'Purchase Date', 'title': 'Date asset was purchased'}
         self.fields["category"].widget.attrs = {'class': 'form-control select2-single'}
+        self.fields["department"].widget.attrs = {'class': 'form-control select2-single'}
+        self.fields["location"].widget.attrs = {'class': 'form-control select2-single '}
         self.fields['cost'].widget.attrs = {'class':'form-control', 'title':'Cost of the asset'}
         self.fields["category"].queryset = Category.objects.filter(enabled=True)
+        self.fields["department"].queryset = Department.objects.filter(enabled=True)
+        self.fields["location"].queryset = Location.objects.filter(enabled=True)
 
     
     class Meta:

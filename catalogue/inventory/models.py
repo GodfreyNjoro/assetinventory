@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from core.models import CoreModel as CM
+from department.models import Department
+from location.models import Location
 
 UserModel = get_user_model()
 SELECT_EMPTY = ('', '------')
@@ -22,7 +24,9 @@ class Asset(CM):
     model = models.CharField(_('Model'), max_length=100, null=True, blank=True, help_text=_('Model name of the asset'))
     serial_no = models.CharField(_('Serial No'), max_length=100, null=True, blank=True, unique=True, help_text=_('Manufacturers serial No.'))
     photo = models.ImageField(_('Asset Photo'), upload_to='images', blank=True, null=True, default=None)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="asset")
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="assets")
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="assets")
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="assets")
     enabled = models.BooleanField(_('enabled'), default=True)
 
     def __str__(self):

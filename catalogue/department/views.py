@@ -19,7 +19,7 @@ UserModel = get_user_model()
 
 def department_create(request, item=None):
     """
-    Creates an department instance
+    Creates an Department instance
     """
     form_class = DepartmentForm
     template_name = 'department/department-list.html'
@@ -63,7 +63,7 @@ def department_delete(request, pk):
 
 def department_detail(request, pk):
     """
-    Returns an department instance
+    Returns an Department instance
     """
     instance = get_object_or_404(Department, pk=pk)
     return render(request, 'department/department-detail.html', context={'instance':instance})

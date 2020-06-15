@@ -19,7 +19,7 @@ UserModel = get_user_model()
 
 def asset_create(request, item=None):
     """
-    Creates an asset instance
+    Creates an Asset instance
     """
     form_class = AssetForm
     template_name = 'inventory/asset-list.html'
@@ -63,7 +63,7 @@ def asset_delete(request, pk):
 
 def asset_detail(request, pk):
     """
-    Returns an asset instance
+    Returns an Asset instance
     """
     instance = get_object_or_404(Asset, pk=pk)
     return render(request, 'inventory/asset-detail.html', context={'instance':instance})
@@ -82,7 +82,7 @@ def asset_list(request, page=1):
 
 def category_create(request, item=None):
     """
-    Creates a category instance
+    Creates a Category instance
     """
     form_class = CategoryForm
     template_name = 'inventory/category-list.html'
@@ -106,13 +106,13 @@ def category_create(request, item=None):
 
 def category_update(request, pk):
     """
-    Edits an AssetCategory instance
+    Edits a Category instance
     """
     return category_create(request, get_object_or_404(Category, pk=pk))
 
 def category_delete(request, pk):
     """
-    Deletes an AssetCategory instance
+    Deletes a Category instance
     """
     item = get_object_or_404(Category, pk=pk)
     # msg = DELETE_SUCCESS.format(item._meta.verbose_name, item)
@@ -126,14 +126,14 @@ def category_delete(request, pk):
 
 def category_detail(request, pk):
     """
-    Returns an asset instance
+    Returns a Category instance
     """
     instance = get_object_or_404(Category, pk=pk)
     return render(request, 'inventory/category-detail.html', context={'instance':instance})
 
 def category_list(request, page=1):
     """
-    Lists all assets
+    Lists all categories
     """
     categories = Category.objects.filter(enabled=True)
     return render(request, 'inventory/category-list.html', context ={'assets':categories, 'page':page})

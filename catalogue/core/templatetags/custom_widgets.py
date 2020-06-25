@@ -35,6 +35,20 @@ def _ksh_widget(val, arg):
     icon = "Ksh"
     return icon_widget(val, arg, icon)
 
+@register.filter(name="assign_icon")
+def assign_icon(obj, default=""):
+    if obj:
+        return mark_safe("<a href='{}' title='Delete {}' data-toggle='tooltip'><i class='simple-icon-trash text-danger'></i></a>".format(obj.get_assign_url(), obj))
+    else:
+        return default
+
+@register.filter(name="delete_icon")
+def delete_icon(obj, default=""):
+    if obj:
+        return mark_safe("<a href='{}' title='Delete {}' data-toggle='tooltip'><i class='simple-icon-trash text-danger'></i></a>".format(obj.get_delete_url(), obj))
+    else:
+        return default
+
 @register.filter(name="edit_icon")
 def edit_icon(obj, default=""):
     if obj:
@@ -42,9 +56,3 @@ def edit_icon(obj, default=""):
     else:
         return default
 
-@register.filter(name="delete_icon")
-def delete_icon(obj, default=""):
-    if obj:
-        return mark_safe("<a href='{}' title='Delete {}' data-toggle='tooltip'><i class='simple-icon-trash text-danger'></i></a>".format(obj.get_delete_url(), obj, obj))
-    else:
-        return default

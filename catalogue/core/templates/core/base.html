@@ -78,9 +78,9 @@
                             <span>Settings</span>
                         </a>
 
-                        <a href="#" class="icon-menu-item">
+                        <a href="{% url "department:staff-list" %}" class="icon-menu-item">
                             <i class="iconsmind-MaleFemale d-block"></i>
-                            <span>Users</span>
+                            <span>Staff</span>
                         </a>
 
                         <a href="{% url "location:site-list" %}" class="icon-menu-item">
@@ -241,8 +241,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="Layouts.Thumbs.html">
-                            <i class="iconsmind-Bar-Code"></i> Licenses <span class="badge badge-pill badge-light float-right mr-4">3</span>
+                        <a href="{% url 'inventory:checkout-list'%}">
+                            <i class="iconsmind-Bar-Code"></i> Events <span class="badge badge-pill badge-light float-right mr-4">3</span>
                         </a>
                     </li>
 

@@ -1,6 +1,8 @@
 from django.urls import include, path
 from .views import asset_create, asset_delete, asset_detail, asset_list, asset_update, \
-                    category_create, category_delete, category_detail, category_list, category_update
+                    category_create, category_delete, category_detail, category_list, \
+                    category_update, checkout_create, checkout_delete, checkout_detail, \
+                    checkout_list, checkout_update
 
 app_name = 'inventory'
 urlpatterns = [
@@ -18,5 +20,13 @@ urlpatterns = [
         path('<uuid:pk>', category_update, name='category-edit'),
         path('<uuid:pk>', category_delete, name='category-delete'),
         path('<uuid:pk>', category_detail, name='category-detail'),
+    ])),
+
+    path('events/', include([
+        path('', checkout_create, name='checkout-add'),
+        path('', checkout_list, name='checkout-list'),
+        path('<uuid:pk>', checkout_update, name='checkout-edit'),
+        path('<uuid:pk>', checkout_delete, name='checkout-delete'),
+        path('<uuid:pk>', checkout_detail, name='checkout-detail'),
     ])),
 ]

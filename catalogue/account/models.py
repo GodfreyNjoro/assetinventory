@@ -8,15 +8,7 @@ from core.models import CoreModel as CM
 from .managers import UserManager
 
 class User(PermissionsMixin, CM, AbstractBaseUser):
-    VENDOR = "Vendor"
-    CLIENT = "Client"
-    Courier = "Courier"
 
-    ROLES = {
-            (VENDOR,'Vendor'),
-            (CLIENT, 'Client'),
-            (Courier, 'Courier')
-            }
 
     username = models.CharField(
             _('username'),
@@ -47,7 +39,7 @@ class User(PermissionsMixin, CM, AbstractBaseUser):
             null=True,
             default=None
         )
-    role = models.CharField(max_length=12, choices=ROLES, default=CLIENT)
+    # role = models.CharField(max_length=12, choices=ROLES, default=CLIENT)
     is_staff = models.BooleanField(
         _("staff status"), default=False, help_text=_("Designates whether the user can log into this admin site.")
     )

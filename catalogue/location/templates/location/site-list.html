@@ -1,14 +1,14 @@
 {% extends "core/base.html" %}
 {% load  bootstrap4 static custom_widgets %}
-{% block title %}Asset{% endblock title%}
+{% block title %}Site{% endblock title%}
 {% block content%}
 <div class="container-fluid disable-text-selection">
     <div class="row">
         <div class="col-12">
             <div class="mb-2">
-                <h1>Asset List</h1>
+                <h1>Site List</h1>
                 <div class="float-sm-right text-zero">
-                    <button type="button" class="btn btn-outline-primary btn-lg top-right-button mr-1" data-toggle="modal" data-backdrop="static" data-target="#assetModalRight">ADD NEW </button>
+                    <button type="button" class="btn btn-outline-primary btn-lg top-right-button mr-1" data-toggle="modal" data-backdrop="static" data-target="#siteModalRight">ADD NEW </button>
 
                     <div class="btn-group ">
                         <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
@@ -33,7 +33,7 @@
                             <a href="#">Inventory</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">Assets</a>
+                            <a href="#">Sites</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Data</li>
                     </ol>
@@ -107,14 +107,14 @@
     </div>
 
     <!-- Begining of Form  Modal-->
-    <div class="modal fade modal-right" id="assetModalRight" tabindex="-1" role="dialog"
+    <div class="modal fade modal-right" id="siteModalRight" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalRight" aria-hidden="true">
         <div class="modal-dialog custom-modal-lg" role="document">    
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {% if asset_form.instance.created %}
-                        Edit Asset
+                        {% if site_form.instance.created %}
+                        Edit Site
                         {% else %}
                         Add New
                         {% endif %}
@@ -125,107 +125,48 @@
                 </div>
                 <div class="modal-body">
 
-                    <form id="asset-form" method="POST" action="{% url 'inventory:asset-add' %}">
+                    <form id="site-form" method="POST" action="{% url 'location:site-add' %}">
                         {% csrf_token %}
                         <div class="form-row">
-                            <div class="form-group col-md-12">
-                                {% bootstrap_field asset_form.description form_group_class="form-group col-sm-12" %}
+                            <div class="form-group col-md-6">
+                                {% bootstrap_field site_form.name form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.tag_id form_group_class="form-group col-sm-12" %}
+                                {% bootstrap_field site_form.description form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.purchased_from form_group_class="form-group col-sm-12" %}
+                                {% bootstrap_field site_form.address form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group  col-md-6">
-                                {{ asset_form.purchase_date|_date_widget:"Purchase Date" }}
+                                {% bootstrap_field site_form.apt form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.brand form_group_class="form-group col-sm-12" %}
+                                {% bootstrap_field site_form.city form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                {{ asset_form.cost|_ksh_widget:"Cost" }}
+                                {% bootstrap_field site_form.state form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.model form_group_class="form-group col-sm-12" %}
+                                {% bootstrap_field site_form.zip form_group_class="form-group col-sm-12" %}
                             </div>
                             <div class="form-group col-md-6 ml-auto">
-                                {% bootstrap_field asset_form.serial_no form_group_class="form-group col-sm-12" %}
+                                {% bootstrap_field site_form.country form_group_class="form-group col-sm-12" %}
                             </div>
                             
                         </div>
-                        <hr>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.category form_group_class="form-group col-sm-12" %}
-                            </div>
-                            <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.department form_group_class="form-group col-sm-12" %}
-                            </div>
-                            <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.location form_group_class="form-group col-sm-12" %}
-                            </div>
-                        </div>
+                        
                        
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                    <input type="submit" value="Submit" class="btn btn-primary" form="asset-form" >
+                    <input type="submit" value="Submit" class="btn btn-primary" form="site-form" >
                 </div>
             </div>
         </div>
     </div>
     <!-- End of form  Modal-->
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="checkout-form" method="POST" action="{% url 'inventory:asset-add' %}">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {{ checkout_form.checkout_date|_date_widget:"Checkout Date" }}
-                            </div>
-                            <div class="form-group col-md-6">
-                                {% bootstrap_field checkout_form.assignee form_group_class="form-group col-sm-12" %}
-                            </div>
-                            <div class="form-group col-md-6">
-                                {{ checkout_form.due_date|_date_widget:"Due Date" }}
-                            </div>
-                            <div class="form-group  col-md-6">
-                                {% bootstrap_field checkout_form.notes form_group_class="form-group col-sm-12" %}
-                            </div>
-                            <div class="form-group col-md-6">
-                                {% bootstrap_field checkout_form.send_email form_group_class="form-group col-sm-12" %}
-                            </div>
-                            <div class="form-group col-md-6">
-                                {% bootstrap_field checkout_form.email form_group_class="form-group col-sm-12" %}
-                            </div>
-                            {% comment %} <div class="form-group col-md-6">
-                                {% bootstrap_field asset_form.model form_group_class="form-group col-sm-12" %}
-                            </div>
-                            <div class="form-group col-md-6 ml-auto">
-                                {% bootstrap_field asset_form.serial_no form_group_class="form-group col-sm-12" %}
-                            </div> {% endcomment %}
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                            <input type="submit" value="Submit" class="btn btn-primary" form="checkout-form" >
-                        </div>
-                       
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="row">
         <div class=" card col-md-12" >
@@ -233,18 +174,20 @@
                 <thead >
                     <tr>
                         <th></th>
-                        <th>Tag ID</th>
-                        <th>Brand</th>
-                        <th>Model</th>
-                        <th>Category</th>
-                        <th>Department</th>
-                        <th>Location</th>
+                        <th>Site</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                        <th>Apt./Suite</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                        <th>Country</th>
                         <th></th>
                     </tr>
                     
                 </thead>
                 <tbody>
-                    {% for asset in assets %}
+                    {% for site in sites %}
                     <tr>
                     <td>
                             <div class="custom-control custom-checkbox pl-1 align-self-center pr-4">
@@ -256,34 +199,33 @@
                         </td>
                         <td>
                             <a class="list-item-heading" href="Layouts.Details.html">
-                                {{ asset.tag_id }}
+                                {{ site.name }}
                             </a>
                         </td>
                         <td>
-                            <p class="text-muted ">{{ asset.brand }}</p>
+                            <p class="text-muted ">{{ site.description }}</p>
                         </td> 
                         <td>
-                            <p class="text-muted ">{{ asset.model }}</p>
+                            <p class="text-muted ">{{ site.address }}</p>
                         </td>
                         <td>
-                            <div class="w-15 w-xs-100">
-                                <span class="badge badge-pill badge-secondary">{{asset.category|upper}}</span>
-                            </div>
+                            <p class="text-muted ">{{ site.apt }}</p>
                         </td>
                         <td>
-                            <div class="w-15 w-xs-100">
-                                <span class="badge badge-pill badge-info">{{asset.department|upper}}</span>
-                            </div>
+                            <p class="text-muted ">{{ site.city }}</p>
                         </td>
                         <td>
-                            <div class="w-15 w-xs-100">
-                                <span class="badge badge-pill badge-success">{{asset.location|upper}}</span>
-                            </div>
+                            <p class="text-muted ">{{ site.state }}</p>
                         </td>
                         <td>
-                            {{asset|edit_icon}}
-                            {{asset|delete_icon}}
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-backdrop="static" data-target=".bd-example-modal-lg" >Assign</button>
+                            <p class="text-muted ">{{ site.zip }}</p>
+                        </td>
+                        <td>
+                            <p class="text-muted ">{{ site.country }}</p>
+                        </td>
+                        <td>
+                            {{site|edit_icon}}
+                            {{site|delete_icon}}
                         </td>
                         
                             

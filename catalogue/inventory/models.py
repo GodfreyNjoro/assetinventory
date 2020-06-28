@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from core.models import CoreModel as CM
+from department.models import Department
+from location.models import Location
 
 UserModel = get_user_model()
 SELECT_EMPTY = ('', '------')
@@ -22,8 +24,11 @@ class Asset(CM):
     model = models.CharField(_('Model'), max_length=100, null=True, blank=True, help_text=_('Model name of the asset'))
     serial_no = models.CharField(_('Serial No'), max_length=100, null=True, blank=True, unique=True, help_text=_('Manufacturers serial No.'))
     photo = models.ImageField(_('Asset Photo'), upload_to='images', blank=True, null=True, default=None)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="asset")
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="assets")
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="assets")
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="assets")
     enabled = models.BooleanField(_('enabled'), default=True)
+    available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.tag_id
@@ -78,3 +83,57 @@ class Category(CM):
 
     def get_delete_url(self):
         return reverse('inventory:category-delete', kwargs={'pk': self.pk})
+
+
+class Checkout(CM):
+    """
+    Asset assignment
+    """
+    PERSON = "Person"
+    LOCATION = "Location"
+
+    AVAILABLE = "Available"
+    CHECK_OUT = "Check Out"
+
+    STATUS = (
+            (AVAILABLE, _('Available')),
+            (CHECK_OUT, _('Check Out')),
+            )
+
+    CATEGORIES = (
+            (PERSON, _('Person')),
+            (LOCATION, _('Site/Location')),
+            )
+
+    asset = models.ForeignKey('Asset', on_delete=models.CASCADE, related_name="assignee")
+    checkout_date = models.DateTimeField(_('Checkout Date'), help_text=_("Date asset is assigned"))
+    assigned_to = models.CharField(_('Checkout To'), choices=CATEGORIES, max_length=100, default=LOCATION)
+    assignee = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='assigned')
+    due_date = models.DateTimeField(_('Due Date'), help_text=_("Due date"))
+    notes = models.TextField(_('Notes'), max_length=140, help_text=_('Notes'))
+    send_email = models.BooleanField(default=False)
+    email = models.EmailField(_('email address'), max_length=128, help_text=_('Required valid email'), null=True, blank=True, default=None)
+#    status = models.CharField(_('Status'), choices=CATEGORIES, max_length=100, Default=CHECK_IN)
+
+    def __str__(self):
+       return self.assigned_to
+
+    class Meta:
+        ordering = ('created', 'checkout_date', )
+
+    @classmethod
+    def get_add_url(cls):
+        return reverse('inventory:checkout-add')
+
+    @classmethod
+    def get_list_url(cls):
+        return reverse('inventory:checkout-list')
+
+    def get_absolute_url(self):
+        return reverse('inventory:checkout-detail', kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('inventory:checkout-edit', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('inventory:checkout-delete', kwargs={'pk': self.pk})

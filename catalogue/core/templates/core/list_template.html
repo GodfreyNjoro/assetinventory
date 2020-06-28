@@ -1,14 +1,13 @@
 {% extends "core/base.html" %}
 {% load  bootstrap4 static custom_widgets %}
-{% block title %}Department{% endblock title%}
 {% block content%}
 <div class="container-fluid disable-text-selection">
     <div class="row">
         <div class="col-12">
             <div class="mb-2">
-                <h1>Deparment List</h1>
+                <h1>{% block h1 %}{% endblock h1%} List</h1>
                 <div class="float-sm-right text-zero">
-                    <button type="button" class="btn btn-outline-primary btn-lg top-right-button mr-1" data-toggle="modal" data-backdrop="static" data-target="#departmentModalRight">ADD NEW </button>
+                    <button type="button" class="btn btn-outline-primary btn-lg top-right-button mr-1" data-toggle="modal" data-backdrop="static" data-target="#categoryModalRight">ADD NEW </button>
 
                     <div class="btn-group ">
                         <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
@@ -30,10 +29,10 @@
                 <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                     <ol class="breadcrumb pt-0">
                         <li class="breadcrumb-item">
-                            <a href="#">Department</a>
+                            <a href="#">{% block bc1 %}{% endblock bc1%}</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">Departments</a>
+                            <a href="#">{% block bc2 %}{% endblock bc2%}</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Data</li>
                     </ol>
@@ -105,85 +104,13 @@
             <div class="separator mb-5"></div>
         </div>
     </div>
+    {% block rightmodal %}{% endblock rightmodal%}
 
-    <!-- Begining of Form  Modal-->
-    <div class="modal fade modal-right" id="departmentModalRight" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalRight" aria-hidden="true">
-        <div class="modal-dialog" role="document">    
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        {% if department_form.instance.created %}
-                        Edit Department
-                        {% else %}
-                        Add New
-                        {% endif %}
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <form id="department-form" method="POST" action="{% url 'department:department-add' %}">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {% bootstrap_field department_form.name form_group_class="form-group col-sm-12" %}
-                            </div>
-                        </div>
-                       
-                       
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                    <input type="submit" value="Submit" class="btn btn-primary" form="department-form" >
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of form  Modal-->
 
 
     <div class="row">
         <div class=" card col-md-12" >
-            <table class="card-body data-table table-padded  responsive nowrap mb-3" data-order="[[ 1, &quot;desc&quot; ]]">
-                <thead >
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th></th>
-                    </tr>
-                    
-                </thead>
-                <tbody>
-                    {% for department in departments %}
-                    <tr>
-                    <td>
-                            <div class="custom-control custom-checkbox pl-1 align-self-center pr-4">
-                                <label class="custom-control custom-checkbox mb-0">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <span class="custom-control-label"></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <a class="list-item-heading" href="Layouts.Details.html">
-                                {{ department.name }}
-                            </a>
-                        </td>
-                        <td>
-                            {{department|edit_icon}}
-                            {{department|delete_icon}}
-                        </td>
-                            
-                    </tr>
-                    {% endfor %}
-
-
-                </tbody>
-            </table>
+            {% block table%}{% endblock table%}
 
         </div>
         
@@ -192,7 +119,6 @@
        
     </div>
 </div>
-
 
 
 {% endblock content %}
